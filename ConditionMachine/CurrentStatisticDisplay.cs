@@ -8,20 +8,12 @@ namespace ConditionMachine
 {
     internal class CurrentStatisticDisplay : IObserver, IDisplayElement
     {
-        private int speed, Tahometr;
+        private int speed, Tahometr;     
 
-        private ISubject conditionMachine;
-
-        public CurrentStatisticDisplay(ISubject conditionMachine)
+        public void update(object sender, NewsEventArgs e)
         {
-            this.conditionMachine = conditionMachine;
-            conditionMachine.registerObserver(this);
-        }
-
-        public void update(string PressureSensor, string BrakeFluidSensor, bool CheckAuto, int speed, int tempp, int Tahometr)
-        {
-            this.speed = speed;
-            this.Tahometr = Tahometr;
+            this.speed = e.speed;
+            this.Tahometr = e.Tahometr;
 
             display();
         }

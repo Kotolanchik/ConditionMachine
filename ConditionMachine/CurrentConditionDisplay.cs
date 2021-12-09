@@ -10,29 +10,28 @@ namespace ConditionMachine
     {
         private string PressureSensor, BrakeFluidSensor;
         private bool CheckAuto;
-        private ISubject conditionMachine;
 
-        public CurrentConditionDisplay(ISubject conditionMachine)
-        {
-            this.conditionMachine = conditionMachine;
-            conditionMachine.registerObserver(this);
-        }
 
-        public void update(string PressureSensor, string BrakeFluidSensor, bool CheckAuto, int speed, int tempp, int Tahometr)
+
+        public void update(object sender, NewsEventArgs e)
         {
-            this.PressureSensor = PressureSensor;
-            this.BrakeFluidSensor = BrakeFluidSensor;
-            this.CheckAuto = CheckAuto;
+            this.PressureSensor = e.PressureSensor;
+            this.BrakeFluidSensor = e.BrakeFluidSensor;
+            this.CheckAuto = e.CheckAuto;
             display();
         }
 
         public void display()
         {
+            
             if (CheckAuto == false && PressureSensor == "normal" && BrakeFluidSensor == "normal")
                 Console.WriteLine("Машина исправна");
             else
                 Console.WriteLine("Необходим ремонт");
-
+            if (CheckAuto == true)
+                Console.WriteLine("Горит чек");
+            else Console.WriteLine("Не горит чек");
+           
         }
 
     }

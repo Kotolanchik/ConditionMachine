@@ -8,19 +8,11 @@ namespace ConditionMachine
 {
     internal class CurrentTempDisplay : IObserver, IDisplayElement
     {
-        private int tempp;
-        private ISubject conditionMachine;
+        private int tempp;     
 
-        public CurrentTempDisplay(ISubject conditionMachine)
+        public void update(object sender, NewsEventArgs e)
         {
-            this.conditionMachine = conditionMachine;
-            conditionMachine.registerObserver(this);
-        }
-
-        public void update(string PressureSensor, string BrakeFluidSensor, bool CheckAuto, int speed, int tempp, int Tahometr)
-        {
-            this.tempp = tempp;
-
+            this.tempp = e.tempp;
             display();
         }
 
@@ -28,9 +20,13 @@ namespace ConditionMachine
         {
             if (tempp > 110)
                 Console.WriteLine("Температура повышена!");
-            else
+            else if(tempp >75 && tempp <109)
                 Console.WriteLine("Температура в норме.");
+            else
+                Console.WriteLine("Температура низкая => повышенный расход топлива");
 
+           
+           
         }
     }
 

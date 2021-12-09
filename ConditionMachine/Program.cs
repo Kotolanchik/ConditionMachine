@@ -11,17 +11,29 @@ namespace ConditionMachine
         static void Main(string[] args)
         {
             var CondMachine = new ConditionMachine();
-            CurrentConditionDisplay currentDisplay = new CurrentConditionDisplay(CondMachine);
-            CurrentStatisticDisplay statisticsDisplay = new CurrentStatisticDisplay(CondMachine);
-            CurrentTempDisplay tempDisplay = new CurrentTempDisplay(CondMachine);
-            CondMachine.setMeasurements("normal", "normal", false, 79, 100, 3000);
+            CurrentConditionDisplay currentDisplay = new CurrentConditionDisplay();
+            CurrentStatisticDisplay statisticsDisplay = new CurrentStatisticDisplay();
+            CurrentTempDisplay tempDisplay = new CurrentTempDisplay();
+
+            CondMachine.NewsChanged += new NewsChangedEventHandler(currentDisplay.update);
+            CondMachine.NewsChanged += new NewsChangedEventHandler(statisticsDisplay.update);
+            CondMachine.NewsChanged += new NewsChangedEventHandler(tempDisplay.update);
+
+            CondMachine.setMeasurements();
             Console.WriteLine();
-            CondMachine.setMeasurements("normal", "normal", true, 150, 120, 8500);
+
+            CondMachine.setMeasurements();
             Console.WriteLine();
-            CondMachine.setMeasurements("hard", "hard", false, 79, 100, 3600);
-            CondMachine.removeObserver(statisticsDisplay);
+
+            CondMachine.setMeasurements();
             Console.WriteLine();
-            CondMachine.setMeasurements("hard", "normal", false, 144, 100, 3600);
+
+            CondMachine.setMeasurements();
+            Console.WriteLine();
+
+            CondMachine.NewsChanged -= tempDisplay.update;
+
+            CondMachine.setMeasurements();
             Console.WriteLine();
 
         }

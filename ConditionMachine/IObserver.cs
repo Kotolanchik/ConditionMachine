@@ -8,6 +8,6 @@ namespace ConditionMachine
 {
     internal interface IObserver
     {
-        void update(string PressureSensor, string BrakeFluidSensor, bool CheckAuto, int speed, int tempp, int Tahometr);
+        void update(object sender, NewsEventArgs e);
     }
 }
