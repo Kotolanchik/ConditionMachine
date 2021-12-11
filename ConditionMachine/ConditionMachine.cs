@@ -8,25 +8,6 @@ using System.Threading.Tasks;
 namespace ConditionMachine
 {
 
-    public class NewsEventArgs
-    {
-        public NewsEventArgs(string PressureSensor, string BrakeFluidSensor, bool CheckAuto, int speed, int tempp, int Tahometr)
-        {
-            this.PressureSensor = PressureSensor;
-            this.BrakeFluidSensor = BrakeFluidSensor;
-            this.CheckAuto = CheckAuto;
-            this.speed = speed;
-            this.tempp = tempp;
-            this.Tahometr = Tahometr;
-        }
-        public string PressureSensor { get; private set; }
-        public string BrakeFluidSensor { get; private set; }
-        public bool CheckAuto { get; private set; }
-        public int speed { get; private set; }
-        public int tempp { get; private set; }
-        public int Tahometr { get; private set; }
-    }
-    public delegate void NewsChangedEventHandler(object sender, NewsEventArgs e);
 
     internal class ConditionMachine: ISubject
     {
